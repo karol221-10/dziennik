@@ -24,7 +24,14 @@
               </div>
               <div class="col-md-9">
                   <h2>Lista uczniów wg klas</h2>
-                  
+                  <div class="form-group">
+                      <label for="classesList">Wybierz klasę</label>
+                      <select class="form-control" id="classesList">
+                          <option th:each="schoolclass : ${schoolclasses}"
+                                  th:value="${schoolclass.classID}"
+                                  th:utext="|${schoolclass.classNumber} ${schoolclass.className}|"/>
+                      </select>
+                  </div>
               </div>
           </div>
       </div>
