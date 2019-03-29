@@ -1,8 +1,7 @@
 package pl.kompikownia.dziennik.dziennik.model;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Date;
+import java.util.*;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -10,12 +9,10 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Table(name="student")
 public class Student {
     private Integer ID;
-    private String Name;
-    private String Surname;
+    private String name;
+    private String surname;
     private Date bornDate;
-    @ManyToMany(mappedBy = "students")
-    private ArrayList<SchoolClass> classes = new ArrayList<>();
-
+    private Set<SchoolClass> classes = new HashSet<>();
     @Id
     @GeneratedValue(strategy = IDENTITY)
     @Column(name="studentID",unique = true,nullable = false)
@@ -24,31 +21,37 @@ public class Student {
     }
     @Column(name="name", nullable=false, length=45)
     public String getName() {
-        return Name;
+        return name;
     }
     @Column(name="surname",nullable=false, length=45)
     public String getSurname() {
-        return Surname;
+        return surname;
     }
     @Temporal(TemporalType.DATE)
     @Column(name="bornDate",nullable = false)
     public Date getBornDate() {
         return bornDate;
     }
-
+    @ManyToMany(mappedBy = "students")
+    public Set<SchoolClass> getClasses() {
+        return classes;
+    }
     public void setID(Integer ID) {
         this.ID = ID;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
     public void setSurname(String surname) {
-        Surname = surname;
+        this.surname = surname;
     }
 
     public void setBornDate(Date bornDate) {
         this.bornDate = bornDate;
+    }
+    public void setClasses(Set<SchoolClass> classes) {
+        this.classes = classes;
     }
 }

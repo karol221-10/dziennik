@@ -2,21 +2,18 @@ package pl.kompikownia.dziennik.dziennik.model;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "class")
 public class SchoolClass {
-    @ManyToMany(cascade = {CascadeType.ALL})
-    @JoinTable(
-           name="class_student",
-            joinColumns = {@JoinColumn(name = "classID")},
-            inverseJoinColumns = {@JoinColumn(name="studentID")}
-    )
-    ArrayList<Student> students = new ArrayList<>();
     private Integer classID;
     private String className;
     private Integer classNumber;
     private Integer educatorID;
+    private Set<Student> students = new HashSet<>();
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,7 +33,15 @@ public class SchoolClass {
     public Integer getEducatorID() {
         return educatorID;
     }
-
+    @ManyToMany(cascade = {CascadeType.ALL},fetch=FetchType.EAGER)
+    @JoinTable(
+            name="class_student",
+            joinColumns = {@JoinColumn(name = "classID")},
+            inverseJoinColumns = {@JoinColumn(name="studentID")}
+    )
+    public Set<Student> getStudents() {
+        return students;
+    }
     public void setClassID(Integer classID) {
         this.classID = classID;
     }
@@ -52,5 +57,7 @@ public class SchoolClass {
     public void setEducatorID(Integer educatorID) {
         this.educatorID = educatorID;
     }
-
+    public void setStudents(Set<Student> students) {
+        this.students = students;
+    }
 }
