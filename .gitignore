@@ -10,7 +10,7 @@ HELP.md
 .settings
 .springBeans
 .sts4-cache
-
+.application.properties
 ### IntelliJ IDEA ###
 .idea
 *.iws
