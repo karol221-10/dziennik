@@ -24,6 +24,10 @@ public class ClassService {
         SchoolClass sch = new SchoolClass(className,classNumber);
         entityManager.persist(sch);
     }
+    public void deleteClassByID(Integer ID) {
+        SchoolClass classToRemove = classRepository.getClassByID(ID);
+        entityManager.remove(classToRemove);
+    }
     public List<SchoolClass> getAllClasses() {
         return classRepository.getAllClasses();
     }

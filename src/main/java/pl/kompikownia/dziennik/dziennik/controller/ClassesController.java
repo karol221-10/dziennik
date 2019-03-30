@@ -26,6 +26,11 @@ public class ClassesController {
         model.addAttribute("classes",allClasses);
         return CLASSES_LIST;
     }
+    @RequestMapping(value="/classes", params="del")
+    public String removeClass(@RequestParam("selected") Integer selectedID, Model model) {
+        classService.deleteClassByID(selectedID);
+        return getSchoolClasses(model);
+    }
     @RequestMapping(value="/classes/add")
     public String addClass(Model model) {
         return ADD_CLASS;
