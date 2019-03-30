@@ -22,7 +22,7 @@ public class ProfileListController {
     public ProfileListController(ClassRepository classRepository) {
         this.classRepository = classRepository;
     }
-    @RequestMapping(value = "/classes", method = RequestMethod.GET)
+    @RequestMapping(value = "/listStudents/classes/", method = RequestMethod.GET)
     public String getStudentByClasses(@RequestParam("classNumber") Integer classID, Model model) {
         List<SchoolClass> allClasses = classRepository.getAllClasses();
         model.addAttribute("schoolclasses",allClasses);

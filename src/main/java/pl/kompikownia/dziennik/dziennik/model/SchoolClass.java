@@ -14,7 +14,13 @@ public class SchoolClass {
     private Integer classNumber;
     private Integer educatorID;
     private Set<Student> students = new HashSet<>();
+    public SchoolClass() {
 
+    }
+    public SchoolClass(String className,Integer classNumber) {
+        this.className = className;
+        this.classNumber = classNumber;
+    }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "classID",unique = true,nullable = false)
