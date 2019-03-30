@@ -40,4 +40,17 @@ public class ClassesController {
         classService.addClass(className,classNumber);
         return "redirect:/classes";
     }
+    @RequestMapping(value="/classes/change")
+    public String changeClass(@RequestParam("selected") Integer selected,Model model) {
+        SchoolClass sch = classService.getClassByID(selected);
+        model.addAttribute("schoolclass",sch);
+        model.addAttribute("selected",selected);
+        return ADD_CLASS;
+    }
+    @RequestMapping(value="/classes/change", params="change")
+    public String changeClassSubmitted(@RequestParam("className") String className,@RequestParam("classNumber")Integer classNumber,@RequestParam("change") Integer ID,Model model)
+    {
+        classService.updateClass(ID,className,classNumber);
+        return "redirect:/classes";
+    }
 };
