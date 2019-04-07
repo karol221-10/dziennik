@@ -9,7 +9,9 @@ import java.util.Set;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
-@Table(name="subject")
+@Table(name="subject",
+       uniqueConstraints=
+        @UniqueConstraint(columnNames={"name","level","type"}))
 public class Subject {
     private Integer ID;
     private String name;

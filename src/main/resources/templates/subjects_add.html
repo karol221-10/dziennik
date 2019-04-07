@@ -25,6 +25,7 @@
         <div class="col-md-9">
             <h2 th:if="${subject == null}">Dodaj przedmiot</h2>
             <h2 th:if="${subject != null}">Edytuj przedmiot</h2>
+            <div th:if="${errorText != null}" class="alert alert-danger" role="alert" th:text="${errorText}"/>
             <form method="get">
                 <div class="form-group">
                     <label for="name">Nazwa przedmiotu</label>

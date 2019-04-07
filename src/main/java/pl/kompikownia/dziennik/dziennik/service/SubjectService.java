@@ -3,6 +3,7 @@ package pl.kompikownia.dziennik.dziennik.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.kompikownia.dziennik.dziennik.model.Subject;
+import pl.kompikownia.dziennik.dziennik.model.enums.ErrorTypes;
 import pl.kompikownia.dziennik.dziennik.model.enums.SubjectLevel;
 import pl.kompikownia.dziennik.dziennik.model.enums.SubjectType;
 import pl.kompikownia.dziennik.dziennik.repository.SubjectRepository;
@@ -24,8 +25,12 @@ public class SubjectService {
 
     public Set<Subject> getAllSubjects() {return subjectRepository.getAllSubjects();}
 
-    public void addSubject(String name, SubjectLevel subjectLevel, SubjectType subjectType) {
-        Subject subject = new Subject(name,subjectLevel,subjectType);
-        entityManager.persist(subject);
+    public ErrorTypes addSubject(String name, SubjectLevel subjectLevel, SubjectType subjectType) {
+        if(subjectRepository.getSpecificSubject(name,subjectLevel,subjectType)==null) {
+            Subject subject = new Subject(name,subjectLevel,subjectType);
+            entityManager.persist(subject);
+            return ErrorTypes.OK;
+        }
+        else return ErrorTypes.SUBJECT_EXISTS;
     }
 }

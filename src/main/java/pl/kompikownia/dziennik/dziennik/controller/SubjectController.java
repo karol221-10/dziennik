@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import pl.kompikownia.dziennik.dziennik.model.Subject;
+import pl.kompikownia.dziennik.dziennik.model.enums.ErrorTypes;
 import pl.kompikownia.dziennik.dziennik.model.enums.SubjectLevel;
 import pl.kompikownia.dziennik.dziennik.model.enums.SubjectType;
 import pl.kompikownia.dziennik.dziennik.service.SubjectService;
@@ -32,7 +33,12 @@ public class SubjectController {
 
     @RequestMapping(value="/subjects/add", params="add")
     public String addSubjectSubmitted(@RequestParam("name") String subjectName, @RequestParam("type") SubjectType subjectType, @RequestParam("level")SubjectLevel subjectLevel,Model model) {
-        subjectService.addSubject(subjectName,subjectLevel,subjectType);
-        return "redirect:/subjects";
+        if(subjectService.addSubject(subjectName,subjectLevel,subjectType).equals(ErrorTypes.OK)) {
+            return "redirect:/subjects";
+        }
+        else {
+            model.addAttribute("errorText","Przedmiot o podanych parametrach już istnieje");
+            return SUBJECT_ADD;
+        }
     }
 }
