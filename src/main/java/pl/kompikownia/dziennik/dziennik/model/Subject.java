@@ -14,7 +14,7 @@ public class Subject {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    @Column(name="subject",nullable = false, unique = true)
+    @Column(name="subjectID",nullable = false, unique = true)
     public Integer getID() {
         return ID;
     }
