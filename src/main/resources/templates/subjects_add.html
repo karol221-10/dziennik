@@ -10,7 +10,7 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <title>Dodaj klasę</title>
+    <title>Dodaj przedmiot</title>
 </head>
 <body>
 <div class="container">
@@ -27,21 +27,28 @@
             <h2 th:if="${subject != null}">Edytuj przedmiot</h2>
             <form method="get">
                 <div class="form-group">
-                    <label for="className">Nazwa klasy</label>
-                    <input th:value="${subject != null} ? ${subject.name}" name="className" required type="text" class="form-control" id="name" placeholder="Wprowadź nazwę przedmiotu">
+                    <label for="name">Nazwa przedmiotu</label>
+                    <input th:value="${subject != null} ? ${subject.name}" name="name" required type="text" class="form-control" id="name" placeholder="Wprowadź nazwę przedmiotu">
                 </div>
                 <div class="form-group">
-                    <label for="classNumber">Numer klasy</label>
-                    <input th:value="${schoolclass != null} ? ${schoolclass.classNumber}" name="classNumber" required type="number" class="form-control" id="classNumber" placeholder="Wprowadź numer klasy">
-                </div>
-                <div class="form-group">
-                    <label for="educatorID">Wychowawca</label>
-                    <select name="educatorID" class="form-control" id="educatorID">
-
+                    <label for="type">Typ przedmiotu: </label>
+                    <select name="type" class="form-control" id="type">
+                        <option th:each="type : ${T(pl.kompikownia.dziennik.dziennik.model.enums.SubjectType).values()}"
+                                th:value="${type}"
+                                th:text="${type}"></option>
                     </select>
+                </div>
+                <div class="form-group">
+                    <label for="level">Poziom przedmiotu</label>
+                    <select name="level" class="form-control" id="level">
+                        <option th:each="level : ${T(pl.kompikownia.dziennik.dziennik.model.enums.SubjectLevel).values()}"
+                                th:value="${level}"
+                                th:text="${level}"></option>
+                    </select>
+                </div>
                     <div class="d-flex flex-row-reverse">
-                        <div th:if="${schoolclass == null}" class="p-2"><button type="submit" formaction="/classes/add" name="add" class="btn btn-primary">Dodaj</button></div>
-                        <div th:if="${schoolclass != null}" class="p-2"><button th:value=${selected} type="submit" formaction="/classes/change" name="change" class="btn btn-primary">Zmień</button></div>
+                        <div th:if="${subject == null}" class="p-2"><button type="submit" formaction="/subjects/add" name="add" class="btn btn-primary">Dodaj</button></div>
+                        <div th:if="${subject != null}" class="p-2"><button th:value=${selected} type="submit" formaction="/subjects/change" name="change" class="btn btn-primary">Zmień</button></div>
                     </div>
                 </div>
             </form>

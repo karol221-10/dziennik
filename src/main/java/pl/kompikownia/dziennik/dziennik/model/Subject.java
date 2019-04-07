@@ -17,6 +17,13 @@ public class Subject {
     private SubjectLevel level;
     private SubjectType type;
 
+    public Subject() {}
+    public Subject(String name, SubjectLevel level, SubjectType type) {
+        this.name = name;
+        this.level = level;
+        this.type = type;
+    }
+
     @Id
     @GeneratedValue(strategy = IDENTITY)
     @Column(name="subjectID",nullable = false, unique = true)
