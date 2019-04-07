@@ -31,6 +31,8 @@
                         <th scope="col">#</th>
                         <th scope="col">Numer</th>
                         <th scope="col">Nazwa</th>
+                        <th scope="col">Typ</th>
+                        <th scope="col">Poziom</th>
                     </tr>
                     <tr th:each="subject : ${subjects}">
                         <td>
@@ -38,6 +40,8 @@
                         </td>
                         <td th:utext="${subject.ID}"/>
                         <td th:utext="${subject.name}"/>
+                        <td th:utext="${subject.type.toLowerCase()}"/>
+                        <td th:utext="${subject.level.toLowerCase()}"/>
                     </tr>
                     </thead>
                 </table>

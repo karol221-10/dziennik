@@ -1,5 +1,8 @@
 package pl.kompikownia.dziennik.dziennik.model;
 
+import pl.kompikownia.dziennik.dziennik.model.enums.SubjectLevel;
+import pl.kompikownia.dziennik.dziennik.model.enums.SubjectType;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -11,6 +14,8 @@ public class Subject {
     private Integer ID;
     private String name;
     private Set<Teacher> learnedBy;
+    private SubjectLevel level;
+    private SubjectType type;
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
@@ -26,14 +31,33 @@ public class Subject {
     public Set<Teacher> getLearnedBy() {
         return learnedBy;
     }
+
+    @Enumerated(EnumType.STRING)
+    @Column(name="level")
+    public SubjectLevel getLevel() {
+        return level;
+    }
+    @Enumerated(EnumType.STRING)
+    @Column(name="type")
+    public SubjectType getType() {
+        return type;
+    }
+
+
     public void setID(Integer ID) {
         this.ID = ID;
     }
-
     public void setName(String name) {
         this.name = name;
     }
     public void setLearnedBy(Set<Teacher> learnedBy) {
         this.learnedBy = learnedBy;
     }
+    public void setLevel(SubjectLevel subjectLevel) {
+        this.level = subjectLevel;
+    }
+    public void setType(SubjectType subjectType) {
+        this.type = subjectType;
+    }
+
 }
