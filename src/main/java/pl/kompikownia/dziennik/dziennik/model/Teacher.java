@@ -7,6 +7,7 @@ import java.util.Set;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
+@Table(name="teacher")
 public class Teacher {
     private Integer ID;
     private String name;
