@@ -33,4 +33,18 @@ public class SubjectService {
         }
         else return ErrorTypes.SUBJECT_EXISTS;
     }
+    public Subject getSubjectByID(Integer ID) {
+        return subjectRepository.getSubjectByID(ID);
+    }
+    public ErrorTypes updateSubject(Integer ID, String name, SubjectLevel level, SubjectType type) {
+        if(subjectRepository.getSpecificSubject(name,level,type)==null) {
+            Subject subject = subjectRepository.getSubjectByID(ID);
+            subject.setName(name);
+            subject.setLevel(level);
+            subject.setType(type);
+            entityManager.merge(subject);
+            return ErrorTypes.OK;
+        }
+        return ErrorTypes.SUBJECT_EXISTS;
+    }
 }

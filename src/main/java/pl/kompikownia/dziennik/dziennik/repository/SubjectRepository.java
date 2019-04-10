@@ -18,4 +18,6 @@ public interface SubjectRepository extends JpaRepository<Subject,Long> {
     Set<Subject> getAllSubjects();
     @Query("SELECT sub FROM Subject sub WHERE sub.name=?1 AND sub.level=?2 AND sub.type=?3")
     Subject getSpecificSubject(String name, SubjectLevel level, SubjectType type);
+    @Query("SELECT sub FROM Subject sub WHERE sub.ID=?1")
+    Subject getSubjectByID(Integer ID);
 }

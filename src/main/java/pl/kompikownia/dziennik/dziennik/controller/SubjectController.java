@@ -41,4 +41,24 @@ public class SubjectController {
             return SUBJECT_ADD;
         }
     }
+    @RequestMapping(value="/subjects/change")
+    public String changeSubject(@RequestParam("selected") Integer selected, Model model) {
+        Subject sub = subjectService.getSubjectByID(selected);
+        model.addAttribute("subject",sub);
+        model.addAttribute("selected",selected);
+        return SUBJECT_ADD;
+    }
+    @RequestMapping(value="/subjects/change",params="change")
+    public String changeSubjectSubmitted(@RequestParam("change") Integer ID,@RequestParam("name") String name,@RequestParam("type") SubjectType type, @RequestParam("level") SubjectLevel level, Model model) {
+        if(subjectService.updateSubject(ID,name,level,type)==ErrorTypes.OK) {
+            return "redirect:/subjects";
+        }
+        else {
+            Subject sub = subjectService.getSubjectByID(ID);
+            model.addAttribute("subject",sub);
+            model.addAttribute("selected",ID);
+            model.addAttribute("errorText","Przedmiot o podanych parametrach już istnieje");
+            return SUBJECT_ADD;
+        }
+    }
 }

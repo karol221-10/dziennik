@@ -34,7 +34,13 @@
                 <div class="form-group">
                     <label for="type">Typ przedmiotu: </label>
                     <select name="type" class="form-control" id="type">
-                        <option th:each="type : ${T(pl.kompikownia.dziennik.dziennik.model.enums.SubjectType).values()}"
+                        <option th:if="${subject != null}"
+                                th:each="type : ${T(pl.kompikownia.dziennik.dziennik.model.enums.SubjectType).values()}"
+                                th:value="${type}"
+                                th:selected="${subject.type==type}"
+                                th:text="${type}"></option>
+                        <option th:if="${subject == null}"
+                                th:each="type : ${T(pl.kompikownia.dziennik.dziennik.model.enums.SubjectType).values()}"
                                 th:value="${type}"
                                 th:text="${type}"></option>
                     </select>
@@ -42,7 +48,13 @@
                 <div class="form-group">
                     <label for="level">Poziom przedmiotu</label>
                     <select name="level" class="form-control" id="level">
-                        <option th:each="level : ${T(pl.kompikownia.dziennik.dziennik.model.enums.SubjectLevel).values()}"
+                        <option th:if="${subject != null}"
+                                th:each="level : ${T(pl.kompikownia.dziennik.dziennik.model.enums.SubjectLevel).values()}"
+                                th:value="${level}"
+                                th:selected="${subject.level==level}"
+                                th:text="${level}"></option>
+                        <option th:if="${subject == null}"
+                                th:each="level : ${T(pl.kompikownia.dziennik.dziennik.model.enums.SubjectLevel).values()}"
                                 th:value="${level}"
                                 th:text="${level}"></option>
                     </select>
