@@ -47,4 +47,8 @@ public class SubjectService {
         }
         return ErrorTypes.SUBJECT_EXISTS;
     }
+    public void deleteSubjectByID(Integer ID) {
+        Subject toRemove = subjectRepository.getSubjectByID(ID);
+        entityManager.remove(toRemove);
+    }
 }

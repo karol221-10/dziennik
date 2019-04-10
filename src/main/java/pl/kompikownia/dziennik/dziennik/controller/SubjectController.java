@@ -61,4 +61,9 @@ public class SubjectController {
             return SUBJECT_ADD;
         }
     }
+    @RequestMapping(value="/subjects", params="del")
+    public String removeSubject(@RequestParam("selected") Integer selectedID, Model model) {
+        subjectService.deleteSubjectByID(selectedID);
+        return getSubjects(model);
+    }
 }
